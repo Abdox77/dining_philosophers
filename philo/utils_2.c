@@ -51,7 +51,6 @@ void	pickup_forks(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
 	curr_time = get_time() - philo->data->start_of_program;
 	safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
-	// pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_lock(philo->left_fork);
 	curr_time = get_time() - philo->data->start_of_program;
 	safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
