@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread -g
 API = -pthread
 
 SRCS = philo.c \

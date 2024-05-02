@@ -25,7 +25,7 @@ int	get_args(int ac, char **av, t_data *data)
 	{
 		data->num_of_times_to_eat = ft_atoi(av[5]);
 		if (data->num_of_times_to_eat < 0)
-			ft_error("error ");
+			ft_error("Error times_to_eat is lesser than 0");
 	}
 	if (data->time_to_die < 60 || data->time_to_eat < 60
 		|| data->time_to_sleep < 60)
@@ -68,7 +68,10 @@ void	init_forks(t_data *data)
 	while (++i < data->num_of_philo)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL))
+		{
 			ft_error("Mutex init failed");
+			return ;
+		}
 	}
 	i = -1;
 	while (++i < data->num_of_philo)
@@ -77,8 +80,6 @@ void	init_forks(t_data *data)
 		if (data->num_of_philo != 1)
 			data->philos[i].left_fork = &(data->forks[(i + 1) % data->num_of_philo]);
 	}
-	// 	data->philos[0].left_fork = &(data->forks[data->num_of_philo - 1]);
-	// else
 	if (data->num_of_philo == 1)
 		data->philos[0].left_fork = &(data->forks[0]);
 }

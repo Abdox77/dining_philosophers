@@ -22,7 +22,6 @@ void	set_start_simulation(t_data *data)
 void	ft_error(char *s)
 {
 	printf(RED "Error " RESET ": %s\n", s);
-	exit(EXIT_SUCCESS);
 }
 
 int	ft_atoi(char *s)
