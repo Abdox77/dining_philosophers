@@ -19,7 +19,8 @@ int	main(int ac, char **av)
 	if (ac < 5 || ac > 6)
 		return (printf(RED "Error " RESET ": Invalid number of arguments\n"),
 			EXIT_FAILURE);
-	get_args(ac, av, &data);
+	if (get_args(ac, av, &data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	init_data(&data);
 	cleanup(&data);
 	return (0);

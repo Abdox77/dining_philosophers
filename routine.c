@@ -30,7 +30,7 @@ void	*routine(void *args)
 	while (check_start_simulation(philo->data) == false)
 		;
 	if (philo->id % 2 == 0)
-		usleep(1e3 * philo->data->time_to_eat / 2);
+		ft_usleep(philo->data->time_to_eat / 2);
 	while (check_if_simulation_ended(philo->data) == false)
 	{
 		eat(philo);

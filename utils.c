@@ -12,6 +12,15 @@
 
 #include "philo.h"
 
+void	ft_usleep(long time)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+		usleep(100);
+}
+
 void	set_start_simulation(t_data *data)
 {
 	pthread_mutex_lock(&(data->start_mutex));
@@ -30,7 +39,7 @@ int	ft_atoi(char *s)
 
 	result = 0;
 	if (!s || !*s)
-		ft_error("Invalid argument");
+		return (ft_error("Invalid argument"), -1);
 	while (*s && *s == ' ')
 		s++;
 	while (*s && *s >= '0' && *s <= '9')
@@ -39,6 +48,6 @@ int	ft_atoi(char *s)
 		s++;
 	}
 	if (*s)
-		ft_error("Invalid argument");
+		return (-1);
 	return (result);
 }

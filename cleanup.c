@@ -19,7 +19,6 @@ void	join_philos(t_data *data)
 	i = 0;
 	if (data->num_of_philo == 1)
 	{
-		pthread_join(data->philos[0].philo, NULL);
 		pthread_join(data->monitor, NULL);
 		return ;
 	}

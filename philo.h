@@ -67,20 +67,21 @@ struct					s_data
 	long				time_to_sleep;
 };
 
-//=====================utils=======================
+/*=====================utils=======================*/
 long					get_time(void);
+void					ft_usleep(long time);
 int						ft_atoi(char *s);
 void					ft_error(char *s);
 void					set_start_simulation(t_data *data);
 
-//=====================init=======================
+/*=====================init=======================*/
 int						get_args(int ac, char **av, t_data *data);
-void					init_forks(t_data *data);
-void					init_mutexes(t_data *data);
+int						init_forks(t_data *data);
+int						init_mutexes(t_data *data);
 void					init_philos(t_data *data);
-void					init_data(t_data *data);
+int						init_data(t_data *data);
 
-//=====================routine=======================
+/*=====================routine=======================*/
 void					*routine(void *data);
 void					eat(t_philo *philo);
 void					ft_sleep(t_philo *philo);
@@ -89,13 +90,13 @@ void					pickup_forks(t_philo *philo);
 void					putdown_forks(t_philo *philo);
 t_bool					is_philo_full(t_philo *philo);
 
-//=====================monitoring=======================
+/*=====================monitoring=======================*/
 void					*monitoring(void *args);
 t_bool					check_if_simulation_ended(t_data *data);
 t_bool					safe_write(t_data *data, long time, int id,
 							char *message);
 
-//=====================cleanup=======================
+/*=====================cleanup=======================*/
 void					join_philos(t_data *data);
 void					cleanup(t_data *data);
 

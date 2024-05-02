@@ -48,7 +48,7 @@ void	eat(t_philo *philo)
 	safe_update_time(philo);
 	safe_write(philo->data, philo->last_time_eaten, philo->id + 1, "is eating");
 	safe_increment(philo);
-	usleep(philo->data->time_to_eat * 1e3);
+	ft_usleep(philo->data->time_to_eat);
 	putdown_forks(philo);
 }
 
@@ -62,5 +62,5 @@ void	ft_sleep(t_philo *philo)
 	pthread_mutex_lock(&(philo->data->print_mutex));
 	printf("%ld %d is sleeping\n", curr_time, philo->id + 1);
 	pthread_mutex_unlock(&(philo->data->print_mutex));
-	usleep(philo->data->time_to_sleep * 1e3);
+	ft_usleep(philo->data->time_to_sleep);
 }
