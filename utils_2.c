@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:23:27 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 10:18:38 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 12:53:40 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_bool	pickup_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_fork);
 		curr_time = get_time() - philo->data->start_of_program;
 		safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
-		return (pthread_mutex_unlock(philo->left_fork), TRUE);
-		if (philo->right_fork == philo->left_fork)
-			pthread_mutex_lock(philo->right_fork);
+		// if (philo->right_fork == philo->left_fork)
+		// 	return (pthread_mutex_unlock(philo->left_fork), TRUE);
+		pthread_mutex_lock(philo->right_fork);
 		curr_time = get_time() - philo->data->start_of_program;
 		safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
 	}

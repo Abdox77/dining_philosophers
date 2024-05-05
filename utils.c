@@ -6,20 +6,20 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:10:53 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 10:04:20 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 12:40:38 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(long time)
-{
-	long	start;
+// vlong	start;
 
-	start = get_time();
-	while (get_time() - start < time)
-		usleep(time * 1e3);
-}
+// 	start = get_time();
+// 	while (get_time() - start < time)
+// 		usleep(time * 1e3);oid	ft_usleep(long time)
+// {
+	
+// }
 
 void	set_start_simulation(t_data *data)
 {

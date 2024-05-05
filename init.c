@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:04:24 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 12:38:00 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 12:52:50 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ int	get_args(int ac, char **av, t_data *data)
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
 	data->time_to_sleep = ft_atol(av[4]);
-	if (data->num_of_philo % 2 == 1 && data->time_to_eat > data->time_to_sleep)
-        data->thinking_time = data->time_to_eat * 2 - data->time_to_sleep;
-    else
-        data->thinking_time = data->time_to_sleep;
 	if (ac == 6)
 	{
 		data->num_of_times_to_eat = ft_atol(av[5]);
@@ -36,6 +32,10 @@ int	get_args(int ac, char **av, t_data *data)
 		|| data->time_to_sleep < 60)
 		return (ft_error("Time stamps should be greater than 60 ms"),
 			EXIT_FAILURE);
+	if (data->num_of_philo % 2 && data->time_to_eat > data->time_to_sleep)
+        data->thinking_time = data->time_to_eat * 2 - data->time_to_sleep;
+    else
+    {data->thinking_time = 0;}
 	return (EXIT_SUCCESS);
 }
 
