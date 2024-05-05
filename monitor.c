@@ -19,15 +19,15 @@ static void	safe_stop_simulation(t_data *data)
 	pthread_mutex_unlock(&(data->stop_mutex));
 }
 
-static int	check_for_death(t_philo philo)
+static int	check_for_death(t_philo *philo)
 {
 	long	curr_time;
 
-	pthread_mutex_lock(&(philo.data->time_mutex));
-	curr_time = get_time() - philo.data->start_of_program
-		- philo.last_time_eaten;
-	pthread_mutex_unlock(&(philo.data->time_mutex));
-	if (curr_time >= philo.data->time_to_die)
+	pthread_mutex_lock(&(philo->time_mutex));
+	curr_time = get_time() - philo->data->start_of_program
+		- philo->last_time_eaten;
+	pthread_mutex_unlock(&(philo->time_mutex));
+	if (curr_time >= philo->data->time_to_die)
 		return (TRUE);
 	return (FALSE);
 }
@@ -55,7 +55,7 @@ void	*monitoring(void *args)
 	{
 		if (++i == philo[0].data->num_of_philo)
 			i = 0;
-		if (check_for_death(philo[i]))
+		if (check_for_death(&(philo[i])))
 		{
 			safe_write(philo[i].data, get_time()
 				- philo[i].data->start_of_program, i + 1, "died");

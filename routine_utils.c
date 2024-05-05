@@ -26,9 +26,9 @@ t_bool	is_philo_full(t_philo *philo)
 
 static void	safe_update_time(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->data->time_mutex));
+	pthread_mutex_lock(&(philo->time_mutex));
 	philo->last_time_eaten = get_time() - philo->data->start_of_program;
-	pthread_mutex_unlock(&(philo->data->time_mutex));
+	pthread_mutex_unlock(&(philo->time_mutex));
 }
 
 static void	safe_increment(t_philo *philo)

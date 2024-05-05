@@ -32,9 +32,9 @@ int	get_args(int ac, char **av, t_data *data)
 		|| data->time_to_sleep < 60)
 		return (ft_error("Time stamps should be greater than 60 ms"),
 			EXIT_FAILURE);
-	if (data->num_of_philo % 2 && data->time_to_eat > data->time_to_sleep)
-        data->thinking_time = data->time_to_eat * 2 - data->time_to_sleep;
-    else
+	// if (data->num_of_philo % 2 && data->time_to_eat > data->time_to_sleep)
+    //     data->thinking_time = data->time_to_eat * 2 - data->time_to_sleep;
+    // else
     {data->thinking_time = 0;}
 	return (EXIT_SUCCESS);
 }
@@ -54,8 +54,6 @@ int	init_data(t_data *data)
 
 int	init_mutexes(t_data *data)
 {
-	if (pthread_mutex_init(&(data->time_mutex), NULL))
-		return (ft_error("Mutex init failed"), EXIT_FAILURE);
 	if (pthread_mutex_init(&(data->stop_mutex), NULL))
 		return (ft_error("Mutex init failed"), EXIT_FAILURE);
 	if (pthread_mutex_init(&(data->start_mutex), NULL))
@@ -102,6 +100,8 @@ void	init_philos(t_data *data)
 		data->philos[i].id = i;
 		data->philos[i].data = data;
 		data->philos[i].philo_is_full = FALSE;
+		if (pthread_mutex_init(&(data->philos[i].time_mutex), NULL))
+			ft_error("Mutex init failed");
 		data->philos[i].number_of_meals = 0;
 		data->philos[i].last_time_eaten = get_time() - data->start_of_program;
 		pthread_create(&(data->philos[i].philo), NULL, routine,
