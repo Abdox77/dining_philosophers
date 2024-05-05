@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:08:21 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 10:11:31 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 12:38:59 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	think(t_philo *philo)
 	if (is_philo_full(philo) || check_if_simulation_ended(philo->data))
 		return ;
 	curr_time = get_time() - philo->data->start_of_program;
+	usleep(philo->data->thinking_time);
 	safe_write(philo->data, curr_time, philo->id + 1, "is sleeping");
 }

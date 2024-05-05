@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:58 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 10:15:06 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 12:38:15 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ struct					s_data
 	long				start_of_program;
 	long				time_to_die;
 	long				time_to_eat;
+	long				thinking_time;
 	long				time_to_sleep;
 };
 
