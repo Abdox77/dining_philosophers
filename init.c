@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:04:24 by amohdi            #+#    #+#             */
-/*   Updated: 2024/04/20 12:57:09 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 10:15:51 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	get_args(int ac, char **av, t_data *data)
 {
-	data->num_of_philo = ft_atoi(av[1]);
+	data->num_of_philo = ft_atol(av[1]);
 	if (data->num_of_philo < 1 || data->num_of_philo > PHILO_MAX)
 		return (ft_error("Invalid number of philosophers"), EXIT_FAILURE);
 	data->num_of_times_to_eat = -1;
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
+	data->time_to_die = ft_atol(av[2]);
+	data->time_to_eat = ft_atol(av[3]);
+	data->time_to_sleep = ft_atol(av[4]);
 	if (ac == 6)
 	{
-		data->num_of_times_to_eat = ft_atoi(av[5]);
+		data->num_of_times_to_eat = ft_atol(av[5]);
 		if (data->num_of_times_to_eat < 0)
 			return (ft_error("Error times_to_eat is lesser than ZERO"),
 				EXIT_FAILURE);
@@ -38,8 +38,8 @@ int	get_args(int ac, char **av, t_data *data)
 int	init_data(t_data *data)
 {
 	data->start_of_program = get_time();
-	data->start_simulation = false;
-	data->end_simulation = false;
+	data->start_simulation = FALSE;
+	data->end_simulation = FALSE;
 	data->num_of_full_philos = 0;
 	if (init_mutexes(data) == EXIT_FAILURE || init_forks(data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -97,13 +97,11 @@ void	init_philos(t_data *data)
 	{
 		data->philos[i].id = i;
 		data->philos[i].data = data;
-		data->philos[i].philo_is_full = false;
+		data->philos[i].philo_is_full = FALSE;
 		data->philos[i].number_of_meals = 0;
 		data->philos[i].last_time_eaten = get_time() - data->start_of_program;
 		pthread_create(&(data->philos[i].philo), NULL, routine,
 			&(data->philos[i]));
-		if (data->num_of_philo == 1)
-			pthread_detach(data->philos[i].philo);
 		i++;
 	}
 	set_start_simulation(data);

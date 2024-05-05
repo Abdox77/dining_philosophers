@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:58 by amohdi            #+#    #+#             */
-/*   Updated: 2024/04/20 13:11:14 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 10:15:06 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 typedef enum s_bool
 {
-	false,
-	true
+	FALSE,
+	TRUE
 }						t_bool;
 
 typedef struct s_data	t_data;
@@ -70,7 +70,7 @@ struct					s_data
 /*=====================utils=======================*/
 long					get_time(void);
 void					ft_usleep(long time);
-int						ft_atoi(char *s);
+long					ft_atol(char *s);
 void					ft_error(char *s);
 void					set_start_simulation(t_data *data);
 
@@ -83,10 +83,10 @@ int						init_data(t_data *data);
 
 /*=====================routine=======================*/
 void					*routine(void *data);
-void					eat(t_philo *philo);
+t_bool					eat(t_philo *philo);
 void					ft_sleep(t_philo *philo);
 void					think(t_philo *philo);
-void					pickup_forks(t_philo *philo);
+t_bool					pickup_forks(t_philo *philo);
 void					putdown_forks(t_philo *philo);
 t_bool					is_philo_full(t_philo *philo);
 

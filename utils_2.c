@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:23:27 by amohdi            #+#    #+#             */
-/*   Updated: 2024/04/20 13:01:23 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 10:18:38 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,39 @@ t_bool	check_if_simulation_ended(t_data *data)
 
 t_bool	safe_write(t_data *data, long time, int id, char *message)
 {
+	if (check_if_simulation_ended(data) == TRUE)
+		return (TRUE);
 	pthread_mutex_lock(&data->print_mutex);
-	if (time == -1)
-		printf("%s\n", message);
-	if (check_if_simulation_ended(data) == true)
-		return (pthread_mutex_unlock(&data->print_mutex), true);
 	printf("%ld %d %s\n", time, id, message);
 	pthread_mutex_unlock(&data->print_mutex);
-	return (false);
+	return (FALSE);
 }
 
-void	pickup_forks(t_philo *philo)
+t_bool	pickup_forks(t_philo *philo)
 {
 	long	curr_time;
 
-	pthread_mutex_lock(philo->right_fork);
-	curr_time = get_time() - philo->data->start_of_program;
-	safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
-	pthread_mutex_lock(philo->left_fork);
-	curr_time = get_time() - philo->data->start_of_program;
-	safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
+	if (philo->id % 2)
+	{
+		pthread_mutex_lock(philo->right_fork);
+		curr_time = get_time() - philo->data->start_of_program;
+		safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
+		pthread_mutex_lock(philo->left_fork);
+		curr_time = get_time() - philo->data->start_of_program;
+		safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->left_fork);
+		curr_time = get_time() - philo->data->start_of_program;
+		safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
+		return (pthread_mutex_unlock(philo->left_fork), TRUE);
+		if (philo->right_fork == philo->left_fork)
+			pthread_mutex_lock(philo->right_fork);
+		curr_time = get_time() - philo->data->start_of_program;
+		safe_write(philo->data, curr_time, philo->id + 1, "has taken a fork");
+	}
+	return (FALSE);
 }
 
 void	putdown_forks(t_philo *philo)

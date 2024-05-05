@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 02:32:39 by amohdi            #+#    #+#             */
-/*   Updated: 2024/04/20 13:05:24 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 10:15:38 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ void	join_philos(t_data *data)
 	int	i;
 
 	i = 0;
-	if (data->num_of_philo == 1)
-	{
-		pthread_join(data->monitor, NULL);
-		return ;
-	}
 	while (i < data->num_of_philo)
 	{
 		pthread_join(data->philos[i].philo, NULL);
