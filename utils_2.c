@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:23:27 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 12:53:40 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/05 20:00:30 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_bool	check_if_simulation_ended(t_data *data)
 
 t_bool	safe_write(t_data *data, long time, int id, char *message)
 {
-	if (check_if_simulation_ended(data) == TRUE)
-		return (TRUE);
 	pthread_mutex_lock(&data->print_mutex);
+	if (check_if_simulation_ended(data) == TRUE)
+		return (pthread_mutex_unlock(&data->print_mutex), TRUE);
 	printf("%ld %d %s\n", time, id, message);
 	pthread_mutex_unlock(&data->print_mutex);
 	return (FALSE);
@@ -46,7 +46,7 @@ t_bool	pickup_forks(t_philo *philo)
 {
 	long	curr_time;
 
-	if (philo->id % 2)
+	if (philo->id + 1 == philo->data->num_of_philo)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		curr_time = get_time() - philo->data->start_of_program;
