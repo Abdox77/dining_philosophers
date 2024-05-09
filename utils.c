@@ -6,20 +6,11 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:10:53 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 12:40:38 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/09 12:06:51 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// vlong	start;
-
-// 	start = get_time();
-// 	while (get_time() - start < time)
-// 		usleep(time * 1e3);oid	ft_usleep(long time)
-// {
-	
-// }
 
 void	set_start_simulation(t_data *data)
 {
@@ -28,18 +19,9 @@ void	set_start_simulation(t_data *data)
 	pthread_mutex_unlock(&(data->start_mutex));
 }
 
-static int	ft_strlen(char *s)
-{
-	if (!*s)
-		return (0);
-	return (ft_strlen(++s) + 1);
-}
-
 void	ft_error(char *s)
 {
-	write(STDERR_FILENO, RED "ERROR : " RESET, ft_strlen("ERROR : "));
-	write(STDERR_FILENO, s, ft_strlen(s));
-	write(STDERR_FILENO, "\n", 1);
+	printf(RED "ERROR : " RESET "%s\n", s);
 }
 
 long	ft_atol(char *s)

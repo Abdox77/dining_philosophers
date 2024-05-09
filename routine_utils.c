@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:08:11 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 12:44:21 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/09 12:08:21 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_bool	eat(t_philo *philo)
 	safe_update_time(philo);
 	safe_write(philo->data, philo->last_time_eaten, philo->id + 1, "is eating");
 	safe_increment(philo);
-	ft_usleep(philo->data->time_to_eat);
+	usleep(philo->data->time_to_eat * 1e3);
 	putdown_forks(philo);
 	return (FALSE);
 }
@@ -62,5 +62,5 @@ void	ft_sleep(t_philo *philo)
 		return ;
 	curr_time = get_time() - philo->data->start_of_program;
 	safe_write(philo->data, curr_time, philo->id + 1, "is sleeping");
-	ft_usleep(philo->data->time_to_sleep);
+	usleep(philo->data->time_to_sleep * 1e3);
 }

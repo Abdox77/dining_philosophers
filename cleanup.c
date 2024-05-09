@@ -6,7 +6,7 @@
 /*   By: amohdi <amohdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 02:32:39 by amohdi            #+#    #+#             */
-/*   Updated: 2024/05/05 10:15:38 by amohdi           ###   ########.fr       */
+/*   Updated: 2024/05/09 11:45:24 by amohdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	cleanup(t_data *data)
 
 	i = -1;
 	while (++i < data->num_of_philo)
+	{
 		pthread_mutex_destroy(&(data->forks[i]));
+		pthread_mutex_destroy(&(data->philos[i].time_mutex));
+	}
 	pthread_mutex_destroy(&(data->start_mutex));
 	pthread_mutex_destroy(&(data->stop_mutex));
 	pthread_mutex_destroy(&(data->print_mutex));
-	pthread_mutex_destroy(&(data->time_mutex));
 }
