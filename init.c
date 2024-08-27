@@ -28,9 +28,9 @@ int	get_args(int ac, char **av, t_data *data)
 			return (ft_error("Error times_to_eat is lesser than ZERO"),
 				EXIT_FAILURE);
 	}
-	if (data->time_to_die < 60 || data->time_to_eat < 60
-		|| data->time_to_sleep < 60)
-		return (ft_error("Time stamps should be greater than 60 ms"),
+	if (data->time_to_die <= 0 || data->time_to_eat <= 0
+		|| data->time_to_sleep <= 0)
+		return (ft_error("Time stamps should be greater than 0 ms"),
 			EXIT_FAILURE);
 	if (data->num_of_philo % 2 && data->time_to_eat >= data->time_to_sleep)
 		data->thinking_time = data->time_to_eat * 2 - data->time_to_sleep;
